@@ -1,0 +1,23 @@
+{
+  "name": "service-worker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel watch src/index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ahmadkzx/service-worker.git"
+  },
+  "keywords": [
+    "service-worker"
+  ],
+  "author": "AhmadKarimzade",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ahmadkzx/service-worker/issues"
+  },
+  "homepage": "https://github.com/ahmadkzx/service-worker#readme"
+}
