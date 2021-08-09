@@ -1,3 +1,7 @@
+/**
+ * initialize service worker
+ * that func handles all sw status (installing, waiting, active)
+ */
 export default async function initServiceWorker() {
   try {
     let svcWorker
