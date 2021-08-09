@@ -13,7 +13,6 @@ export default async function initServiceWorker() {
 
     navigator.serviceWorker.addEventListener('controllerchange', () => svcWorker = navigator.serviceWorker.controller)
 
-    console.log('Service Worker Activated Successfully')
 
   } catch(e) {
     console.error('[Init Service Worker Function]: ', e)
