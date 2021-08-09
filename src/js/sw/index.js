@@ -1,3 +1,4 @@
+import { sendMessage } from './communicate'
 import { handleInstallEvent, handleActivateEvent } from './handlers'
 
 setEventHandlers()
@@ -9,3 +10,5 @@ function setEventHandlers() {
   self.addEventListener('install', handleInstallEvent)
   self.addEventListener('activate', handleActivateEvent)
 }
+
+sendMessage('Hello client im new service worker')
