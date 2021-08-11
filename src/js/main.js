@@ -1,7 +1,11 @@
 import { handleMessage, sendMessage } from './utils/communicate'
 import initServiceWorker from './utils/initServiceWorker'
 
-initServiceWorker()
-navigator.serviceWorker.addEventListener('message', handleMessage)
+main()
 
-sendMessage('Hello SW')
+async function main() {
+  const svcWorker = await initServiceWorker()
+  navigator.serviceWorker.addEventListener('message', handleMessage)
+
+  sendMessage(/*target*/ svcWorker, /*message*/ 'Hello SW')
+}

@@ -3,7 +3,7 @@
  * that func handles all sw status (installing, waiting, active)
  */
 export default async function initServiceWorker() {
-  try {
+  return new Promise(async resolve => {
     let svcWorker
     let svcWorkerInit
 
@@ -13,8 +13,6 @@ export default async function initServiceWorker() {
 
     navigator.serviceWorker.addEventListener('controllerchange', () => svcWorker = navigator.serviceWorker.controller)
 
-
-  } catch(e) {
-    console.error('[Init Service Worker Function]: ', e)
-  }
+    resolve(svcWorker)
+  })
 }

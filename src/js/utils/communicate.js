@@ -8,11 +8,16 @@ export function handleMessage({ data }) {
 
 /**
  * send message to service worker
+ * @param {ServiceWorker} target
  * @param {*} msg 
  */
-export function sendMessage(msg) {
+export function sendMessage(target, msg) {
   try {
-    navigator.serviceWorker.controller.postMessage(msg)
+    if (target) {
+      target.postMessage(msg)
+    } else if (navigator.serviceWorker.controller) {
+      navigator.serviceWorker.controller.postMessage(msg)
+    }
 
   } catch(e) {
     console.error('[Send Message To Service Worker]: ', e)
