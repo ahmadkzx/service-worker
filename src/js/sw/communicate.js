@@ -4,7 +4,6 @@
  * @returns {Promise} - send message promise
  */
 export async function sendMessage(msg) {
-
   const allClients = await clients.matchAll({ includeUncontrolled: true }) // get all clients even this sw have not control on
 
   return Promise.all(
@@ -15,4 +14,12 @@ export async function sendMessage(msg) {
 
     })
   )
+}
+
+/**
+ * handle new message from client
+ * @param {*} data - message content
+ */
+export function handleMessage({ data }) {
+  console.log('[A Message From Client]: ', data)
 }
