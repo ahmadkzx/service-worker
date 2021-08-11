@@ -1,4 +1,4 @@
-import { sendMessage } from './communicate'
+import { sendMessage, handleMessage } from './communicate'
 import { handleInstallEvent, handleActivateEvent } from './handlers'
 
 setEventHandlers()
@@ -7,6 +7,7 @@ setEventHandlers()
  * set sw event listeners
  */
 function setEventHandlers() {
+  self.addEventListener('message', handleMessage)
   self.addEventListener('install', handleInstallEvent)
   self.addEventListener('activate', handleActivateEvent)
 }
