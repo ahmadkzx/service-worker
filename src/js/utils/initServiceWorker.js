@@ -7,7 +7,7 @@ export default async function initServiceWorker() {
     let svcWorker
     let svcWorkerInit
 
-    svcWorkerInit = await navigator.serviceWorker.register('../sw/index.js')
+    svcWorkerInit = await navigator.serviceWorker.register('../sw/index.js', { scope: '/' })
 
     svcWorker = svcWorkerInit.installing || svcWorkerInit.waiting || svcWorkerInit.active
 
