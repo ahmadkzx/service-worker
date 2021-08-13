@@ -7,7 +7,7 @@ const distPath = path.join(process.cwd(), '/dist/')
 http.createServer(async (req, res) => {
 
   try {
-    const reqUrl = (req.url === '/') ? reqUrl + 'index.html' : req.url
+    const reqUrl = (req.url === '/') ? req.url + 'index.html' : req.url
     const contentPath = path.join(distPath, reqUrl)
     const fileType = path.extname(contentPath)
 
