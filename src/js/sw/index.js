@@ -1,3 +1,4 @@
+import { handleFetchEvent } from './cache'
 import { sendMessage, handleMessage } from './communicate'
 import { handleInstallEvent, handleActivateEvent } from './handlers'
 
@@ -8,6 +9,7 @@ setEventHandlers()
  */
 function setEventHandlers() {
   self.addEventListener('message', handleMessage)
+  self.addEventListener('fetch', handleFetchEvent)
   self.addEventListener('install', handleInstallEvent)
   self.addEventListener('activate', handleActivateEvent)
 }
