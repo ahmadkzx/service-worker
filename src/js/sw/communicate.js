@@ -1,3 +1,5 @@
+import messageHandlers from './messageHandlers'
+
 /**
  * send message to all clients (browser tabs)
  * @param {*} msg 
@@ -10,6 +12,7 @@ export async function sendMessage(msg) {
     allClients.map(client => {
       
       const channel = new MessageChannel()
+      channel.port2.onmessage = handleMessage
       return client.postMessage(msg, [ channel.port2 ])
 
     })
@@ -18,8 +21,15 @@ export async function sendMessage(msg) {
 
 /**
  * handle new message from client
+ * if in message handler is exist handler will run
  * @param {*} data - message content
  */
 export function handleMessage({ data }) {
-  console.log('[A Message From Client]: ', data)
+
+  if (data.handler && messageHandlers[data.handler]) { // check is have handler
+    messageHandlers[data.handler](data.data)
+  } else {
+    console.log('[A Message From Client]: ', data)
+  }
+  
 }

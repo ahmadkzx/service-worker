@@ -11,7 +11,7 @@ export function handleMessage({ data }) {
  * @param {ServiceWorker} target
  * @param {*} msg 
  */
-export function sendMessage(target, msg) {
+export function sendMessage(msg, target) {
   try {
     if (target) {
       target.postMessage(msg)
