@@ -40,6 +40,11 @@ async function router(req) {
   }
 }
 
+/**
+ * do fetch normal request
+ * @param {Request} req 
+ * @returns {Response}
+ */
 async function doRequest(req) {
   try {
     const fetchOptions = {
@@ -62,12 +67,17 @@ async function doRequest(req) {
   }
 }
 
+/**
+ * respond request with cache (if is exist)
+ * @param {Request} req 
+ * @returns {Response}
+ */
 async function respondWithCache(req) {
   try {
     const cache = await caches.open(cacheName)
 
     const cachedRes = await cache.match(req.clone())
-    if (cachedRes) return cachedRes
+    return cachedRes
 
   } catch(e) {
     console.error('[Service Worker Respond With Cache]: ', e)
