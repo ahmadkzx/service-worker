@@ -21,8 +21,26 @@ export function handleFetchEvent(e) {
  * @returns {Response}
  */
 async function router(req) {
-  const cache = await caches.open(cacheName)
+  try {
+    const isOnline = self.isOnline ?? true
+    let res
 
+    if (isOnline) {
+      res = await doRequest(req)
+    } else {
+      res = await respondWithCache(req)
+    }
+
+    if (res) return res
+
+    throw new Error('Request Failed')
+
+  } catch(e) {
+    console.error('[Service Worker Router]: ', e)
+  }
+}
+
+async function doRequest(req) {
   try {
     const fetchOptions = {
       method: 'GET',
@@ -34,14 +52,24 @@ async function router(req) {
     const res = await fetch(req.url, fetchOptions)
 
     if (res.ok) {
+      const cache = await caches.open(cacheName)
       await cache.put(req.clone(), res.clone())
       return res
     }
 
   } catch(e) {
+    console.error('[Service Worker Do Request]: ', e)
+  }
+}
+
+async function respondWithCache(req) {
+  try {
+    const cache = await caches.open(cacheName)
+
     const cachedRes = await cache.match(req.clone())
     if (cachedRes) return cachedRes
 
-    console.error('[Service Worker Router]: ', e)
+  } catch(e) {
+    console.error('[Service Worker Respond With Cache]: ', e)
   }
 }
